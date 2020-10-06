@@ -41,10 +41,17 @@ INSTALLED_APPS = [
     'knox',
     'accounts',
     'catalogos',
+    'frontend'
 
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
+}
+
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
