@@ -10,6 +10,18 @@ const Header = () => {
     
     const authLinks = (
         <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
+
+            <li className="nav-item">
+                <a className="dropdown-item" href="/#/cBanner">Banners</a>
+            </li>
+            <li className="nav-item">
+                <a className="dropdown-item" href="/#/cMunicipio">Municipio</a>
+            </li>
+            <li className="nav-item">
+                <a className="dropdown-item" href="/#/cEscuela">Escuela</a>
+            </li>
+ 
+ 
              <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span><strong>{user ? `Usuario:  ${user.username}` : ""}</strong></span>
@@ -32,17 +44,24 @@ const Header = () => {
                 </a>
                 
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#">Departments</a>                    
+                <a className="dropdown-item" href="#">Option X</a>                    
                 <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#">Groups</a>
-                <a className="dropdown-item" href="#">Products</a>    
+                <a className="dropdown-item" href="#">option A</a>
+                <a className="dropdown-item" href="#">option B</a>    
                 
                 </div>
             </li>   
 
             <li className="nav-item">
-             <a className="dropdown-item" href="#">Car Sales</a>
+             <a className="dropdown-item" href="/#/sweet">sweet home</a>
             </li>
+
+
+            <li className="nav-item">
+            <a className="dropdown-item" href="/#/login">login</a>
+            </li>
+
+            
 
         
         </ul>                        
@@ -55,7 +74,7 @@ const Header = () => {
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <a className="navbar-brand" href="#">ABCdatoz #code</a>                        
+                <a className="navbar-brand" href="#">Ciudadania Digital</a>                        
             </div>
             {isAuthenticated ? authLinks : guestLinks}
         </nav>

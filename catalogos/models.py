@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
@@ -8,3 +10,37 @@ class Tipo(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class Banner(models.Model):
+    titulo = models.CharField(max_length=255)
+    imagen = models.ImageField(upload_to='noocs_images/banner')
+    status = models.BooleanField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    updated_by = models.CharField(max_length=256)
+
+
+class Municipio(models.Model):
+    clave = models.CharField(max_length=20)
+    nombre = models.CharField(max_length=255)
+    status = models.BooleanField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    updated_by = models.CharField(max_length=256)
+
+    class Meta:
+        ordering = ['clave']
+
+class Escuela(models.Model):
+    municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, null=True)
+    clave = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=255)
+    direccion = models.CharField(max_length=255)
+    status = models.BooleanField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    updated_by = models.CharField(max_length=256)
+

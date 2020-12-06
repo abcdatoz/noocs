@@ -1,37 +1,26 @@
 import React, {  Fragment } from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter  as Router, Route, Switch, Redirect} from 'react-router-dom'
-import Home from './Home'
+
 
 import { Provider } from 'react-redux'
 import store from '../store'
 
 import Header from './layout/Header'    
 
-
-/*
-import { Provider as AlertProvider} from 'react-alert'
-import AlertTemplate from 'react-alert-template-basic'
-
-import Alerts from './layout/Alerts'   
-
 import Login from './accounts/Login'   
 import Register from './accounts/Register'   
 import PrivateRoute from './common/PrivateRoute'  
 
-import { loadUser } from '../actions/auth'
 
-import Medidas from './medidas'
-import Grupos from './grupos'
-import Productos from './productos'
-import Departamentos from './departamentos/Dashboard'
-import Posts from './posts'
 
-const alertOptions = {
-    timeout:3000,
-    position:'top center'
-}
-*/
+import Home from './Home'
+import SweetHome from './SweetHome'
+import BannerAdmin from './cruds/BannerAdmin'
+import Municipio from './cruds/Municipio'
+import Escuela from './cruds/Escuela'
+ 
+
 
 const App = () => {
     return (
@@ -42,7 +31,15 @@ const App = () => {
                     <div className="container">
                         <Switch>
                             <Route exact path="/" component = {Home} />
+                            <Route exact path="/register" component = {Register} />
+                            <Route exact path="/login" component = {Login} />
 
+                            <PrivateRoute exact path="/sweet" component = {SweetHome} />
+                            <PrivateRoute exact path="/cBanner" component = {BannerAdmin} />
+                            <PrivateRoute exact path="/cMunicipio" component={Municipio} />
+                            <PrivateRoute exact path="/cEscuela" component={Escuela} />
+                              
+                            
                         </Switch>
                         
                     </div>

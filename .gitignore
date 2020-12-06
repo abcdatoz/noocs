@@ -5,5 +5,5 @@ build/Release
 node_modules/
 
 #images
-#frontend/static/media/my_cms_images/
+noocs_images/
 
