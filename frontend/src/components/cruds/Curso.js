@@ -1,35 +1,45 @@
 import React,{ useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {getBanners, addBanner, editBanner, deleteBanner} from '../../actions/BannerActions'
+import {getCursos, addCurso, editCurso, deleteCurso} from '../../actions/CursoActions'
 
-const BannerAdmin =() =>{
-    const [titulo, setTitulo] = useState('')
+const Curso =() =>{
+    const [nombre, setNombre] = useState('')
     const [imagen, setImagen] = useState('')
-    
+    const [descripcionA, setDescripcionA] = useState('')
+    const [descripcionB, setDescripcionB] = useState('')
+    const [descripcionC, setDescripcionC] = useState('')
+
     const [mode, setMode] = useState('new')
     const [id, setId] = useState('')
 
     
     const auth = useSelector(state => state.auth)
-    const lista = useSelector(state => state.banner.lista)
+    const cursos = useSelector(state => state.curso.lista)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getBanners())
+        dispatch(getCursos())
     }, [])
 
 
     const agregar = () => {
-        setTitulo('')
+        setNombre('')
         setImagen('')
-        
+        setDescripcionA('')
+        setDescripcionB('')
+        setDescripcionC('')
+
         setMode('new')
+
     }
     
 
     const editar = (item)=>{
-        setTitulo(item.titulo)        
+        setNombre(item.nombre)
+        setDescripcionA(item.descripcionA)
+        setDescripcionB(item.descripcionB)
+        setDescripcionC(item.descripcionC)
         setId(item.id)
         setMode('edit')
         $('#MyModal').modal('show')
@@ -38,30 +48,37 @@ const BannerAdmin =() =>{
     const guardar = (e) =>{
         e.preventDefault()
 
-        if (titulo == '') {
-            alert('No ha capturado el titulo')
+        if (nombre == '') {
+            alert('No ha capturado el nombre de curso')
             return
         }
         if (imagen == '') {
             alert('No ha elegido la imagen del curso')
             return
         }
-         
+        if (descripcionA == ''){
+            alert('No ha capturado la descripción del curso')
+            return
+        }
+        
 
 
         let form_data = new FormData()
-        form_data.append('titulo', titulo) 
+        form_data.append('nombre', nombre) 
         form_data.append('imagen', imagen, imagen.name)
+        form_data.append('descripcionA', descripcionA) 
+        form_data.append('descripcionB', descripcionB) 
+        form_data.append('descripcionC', descripcionC) 
         form_data.append('updated_by', 'usuario : ' + auth.user.username)
 
  
         if (mode == 'new'){
-            dispatch(addBanner(form_data))
+            dispatch(addCurso(form_data))
             $('#MyModal').modal('hide')
         }
 
         if (mode == 'edit'){
-            dispatch(editBanner(form_data,id))
+            dispatch(editCurso(form_data,id))
             $('#MyModal').modal('hide')
         }
     }
@@ -72,7 +89,7 @@ const BannerAdmin =() =>{
     }
 
     const eliminarRegistro = () => {
-        dispatch(deleteBanner(id))
+        dispatch(deleteCurso(id))
         $('#MyConfirmation').modal('hide')
     }
 
@@ -80,7 +97,7 @@ const BannerAdmin =() =>{
 
     return (
         <>
-            <h2>Banners</h2>
+            <h2>Cursos</h2>
 
             <button
                 type="button"
@@ -107,14 +124,14 @@ const BannerAdmin =() =>{
                         
                             <form>
                                 <div className="form-group">
-                                    <label>*Titulo</label>
+                                    <label>*Nombre</label>
                                     <input 
                                         className="form-control"
                                         type="text"
-                                        placeholder="Introduzca el titulo"
-                                        name="titulo"                                    
-                                        onChange = { e => setTitulo(e.target.value)  }
-                                        value={titulo}                                                                         
+                                        placeholder="Introduzca el nombre del curso"
+                                        name="nombre"                                    
+                                        onChange = { e => setNombre(e.target.value)  }
+                                        value={nombre}                                                                         
                                     />
                                 </div>
 
@@ -130,7 +147,44 @@ const BannerAdmin =() =>{
                                     />
                                 </div>
 
-   
+
+                                <div className="form-group">
+                                    <label>*Descripción A</label>                                
+                                    <textarea 
+                                        className="form-control"
+                                        name="descripcionA"
+                                        placeholder="Introduzca la descripción A del curso"
+                                        rows="4"
+                                        onChange={ e => setDescripcionA(e.target.value)}
+                                        value={descripcionA}>
+                                    </textarea>                                 
+
+                                </div>
+                                <div className="form-group">
+                                    <label>Descripción B (opcional)</label>                                
+                                    <textarea 
+                                        className="form-control"
+                                        name="descripcionB"
+                                        placeholder="Introduzca la descripción B del curso"
+                                        rows="4"
+                                        onChange={ e => setDescripcionB(e.target.value)}
+                                        value={descripcionB}>
+                                    </textarea>                                 
+
+                                </div>
+                                <div className="form-group">
+                                    <label>Descripción C</label>                                
+                                    <textarea 
+                                        className="form-control"
+                                        name="descripcionC"
+                                        placeholder="Introduzca la descripción C del curso"
+                                        rows="4"
+                                        onChange={ e => setDescripcionC(e.target.value)}
+                                        value={descripcionC}>
+                                    </textarea>                                 
+
+                                </div>
+
 
 
                             </form>
@@ -146,16 +200,22 @@ const BannerAdmin =() =>{
 
             <table className="table table-striped">
                 <thead>
-                    <th>Titulo</th>
-                    <th>Nombre</th>                    
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Descripción A</th>
+                    <th>Descripción B</th>
+                    <th>Descripción C</th>
                     <th> </th> 
                 </thead>     
                 <tbody>
                     {
-                        lista.map(item=>(
+                        cursos.map(item=>(
                             <tr key={item.id}>
                                 <td><img src={item.imagen}  alt="foto" width="120px" height="120px"/> </td>
-                                <td>{item.titulo}</td>                                
+                                <td>{item.nombre}</td>
+                                <td>{item.descripcionA}</td>
+                                <td>{item.descripcionB}</td>
+                                <td>{item.descripcionC}</td>
                                 <td>
                                     <button  onClick={() => editar(item)} className="btn btn-default btn-lg" >
                                         <span className="fa fa-edit" aria-hidden="true"></span>
@@ -199,4 +259,4 @@ const BannerAdmin =() =>{
 }
 
 
-export default BannerAdmin;
+export default Curso;

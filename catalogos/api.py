@@ -1,5 +1,5 @@
-from catalogos.models import Tipo, Banner, Municipio, Escuela 
-from .serializers import TipoSerializer, BannerSerializer, MunicipioSerializer,EscuelaSerializer
+from catalogos.models import Tipo, Banner, Municipio, Escuela , Curso
+from .serializers import TipoSerializer, BannerSerializer, MunicipioSerializer,EscuelaSerializer, CursoSerializer
 
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
@@ -60,22 +60,83 @@ class BannerViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = BannerSerializer
 
-
-    def create(self, request, *arg, **kargs):
+    def create (self, request, *args, **kargs):
         data = request.data
-        ban = Banner.objects.create(
+        banner = Banner.objects.create(
             titulo = data['titulo'],
             imagen = data['imagen'],
             status = True,
             created_by = self.request.user,
             updated_by = 'usuario : ' + self.request.user.username
         )
-
-        ban.save()
-        serializer = BannerSerializer(ban)
+        banner.save()
+        serializer = BannerSerializer(banner)
         return Response(serializer.data)
+    
+    def update(self, request, *args, **kargs):
+        data = request.data
 
+        instance = self.get_object()
+        instance.imagen.delete()
+        instance.nombre = data['titulo']        
+        instance.imagen = data['imagen']
+
+        instance.save()
+        serializer = BannerSerializer(instance)
+        return Response(serializer.data)
+         
+
+    
     def destroy(self, request, *args, **kargs):
         instance = self.get_object()
         instance.imagen.delete()
         self.perform_destroy(instance)
+
+        serializer = BannerSerializer(instance)        
+        return Response(serializer.data)
+
+class CursoViewSet(viewsets.ModelViewSet):
+    queryset = Curso.objects.all()
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = CursoSerializer
+
+    def create (self, request, *args, **kargs):
+        data = request.data
+        curso = Curso.objects.create(
+            nombre = data['nombre'],
+            imagen = data['imagen'],
+            descripcionA = data['descripcionA'],
+            descripcionB = data['descripcionB'],
+            descripcionC = data['descripcionC'],
+            status = True,
+            created_by = self.request.user,
+            updated_by = 'usuario : ' + self.request.user.username
+        )
+        curso.save()
+        serializer = CursoSerializer(curso)
+        return Response(serializer.data)
+    
+    def update(self, request, *args, **kargs):
+        data = request.data
+
+        instance = self.get_object()
+        instance.imagen.delete()
+        instance.nombre = data['nombre']
+        instance.descripcionA = data['descripcionA']
+        instance.descripcionB = data['descripcionB']
+        instance.descripcionC = data['descripcionC']
+        instance.imagen = data['imagen']
+
+        instance.save()
+        serializer = CursoSerializer(instance)
+        return Response(serializer.data)
+         
+
+    
+    def destroy(self, request, *args, **kargs):
+        instance = self.get_object()
+        instance.imagen.delete()
+        self.perform_destroy(instance)
+
+        serializer = CursoSerializer(instance)        
+        return Response(serializer.data)

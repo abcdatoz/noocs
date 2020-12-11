@@ -44,3 +44,15 @@ class Escuela(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     updated_by = models.CharField(max_length=256)
 
+class Curso(models.Model):
+    nombre = models.CharField(max_length=255)
+    imagen = models.ImageField(upload_to='noocs_images/cursos')
+    descripcionA =models.CharField(max_length=500)
+    descripcionB =models.CharField(max_length=500)
+    descripcionC =models.CharField(max_length=500)
+    status = models.BooleanField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    updated_by = models.CharField(max_length=256)
+

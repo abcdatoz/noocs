@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from catalogos.models import Tipo, Banner, Municipio, Escuela
+from catalogos.models import Tipo, Banner, Municipio, Escuela, Curso
 
 class TipoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,4 +19,9 @@ class MunicipioSerializer(serializers.ModelSerializer):
 class EscuelaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Escuela
+        fields = '__all__'
+
+class CursoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Curso
         fields = '__all__'

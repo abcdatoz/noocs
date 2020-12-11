@@ -2,27 +2,27 @@ import axios from 'axios'
 import {createMessage, returnErrors} from './messages' 
 import { tokenConfig } from './auth'
 
-export const GET_BANNERS = 'GET_BANNERS';
-export const ADD_BANNER = 'ADD_BANNER';
-export const EDIT_BANNER = 'EDIT_BANNER';
-export const DELETE_BANNER='DELETE_BANNER';
+export const GET_CURSOS = 'GET_CURSOS';
+export const ADD_CURSO = 'ADD_CURSO';
+export const EDIT_CURSO = 'EDIT_CURSO';
+export const DELETE_CURSO='DELETE_CURSO';
 
-export const  getBanners = () => (dispatch, getState) => {
-    axios.get('/api/banner/')
+export const  getCursos = () => (dispatch, getState) => {
+    axios.get('/api/curso/')
         .then( res => {
                 dispatch({ 
-                    type: GET_BANNERS,
+                    type: GET_CURSOS,
                     payload: res.data 
                 });
             })
         .catch ( err => dispatch(returnErrors(err.response.data, err.response.status)));
 };  
 
-export const addBanner = (banner) => (dispatch, getState) => {
-    axios.post ('/api/banner/', banner, tokenConfig(getState))
+export const addCurso = (registro) => (dispatch, getState) => {
+    axios.post ('/api/curso/', registro, tokenConfig(getState))
         .then(res=>{
             dispatch({
-                type: ADD_BANNER,
+                type: ADD_CURSO,
                 payload: res.data
             });
             dispatch(createMessage({msg:'El registro fue guardado satisfactoriamente'}));
@@ -32,11 +32,11 @@ export const addBanner = (banner) => (dispatch, getState) => {
         );
 };
 
-export const editBanner = ( banner, id) => (dispatch, getState) => {
-    axios.put(`/api/banner/${id}/`, banner, tokenConfig(getState))
+export const editCurso = ( registro, id) => (dispatch, getState) => {
+    axios.put(`/api/curso/${id}/`, registro, tokenConfig(getState))
         .then( res => {
             dispatch({
-                type: EDIT_BANNER,
+                type: EDIT_CURSO,
                 payload: res.data
             });
             dispatch(createMessage({msg:'El registro fue actualizado satisfactoriamente'}));
@@ -44,11 +44,11 @@ export const editBanner = ( banner, id) => (dispatch, getState) => {
         .catch ( err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
 
-export const deleteBanner = (id) => (dispatch, getState)=>{
-    axios.delete(`/api/banner/${id}/`, tokenConfig(getState))
+export const deleteCurso = (id) => (dispatch, getState)=>{
+    axios.delete(`/api/curso/${id}/`, tokenConfig(getState))
         .then( res => {
             dispatch({
-                type: DELETE_BANNER,
+                type: DELETE_CURSO,
                 payload: id
             });
             dispatch(createMessage({msg:'El registro ha sido eliminado ...'}));

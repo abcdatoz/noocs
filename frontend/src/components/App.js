@@ -19,6 +19,7 @@ import SweetHome from './SweetHome'
 import BannerAdmin from './cruds/BannerAdmin'
 import Municipio from './cruds/Municipio'
 import Escuela from './cruds/Escuela'
+import Curso from './cruds/Curso'
  
 
 
@@ -38,6 +39,7 @@ const App = () => {
                             <PrivateRoute exact path="/cBanner" component = {BannerAdmin} />
                             <PrivateRoute exact path="/cMunicipio" component={Municipio} />
                             <PrivateRoute exact path="/cEscuela" component={Escuela} />
+                            <PrivateRoute exact path="/cCurso" component={Curso} />
                               
                             
                         </Switch>
