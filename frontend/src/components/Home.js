@@ -46,6 +46,9 @@ const Home = () => {
                     ))
                     }
 
+
+                     
+
  
             {    
                 cursos.map((each, index) => (  

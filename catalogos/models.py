@@ -56,3 +56,12 @@ class Curso(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     updated_by = models.CharField(max_length=256)
 
+class VideoActividades(models.Model):
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, null=True)
+    tipo = models.CharField(max_length=50)
+    orden = models.IntegerField()
+    nombre = models.CharField(max_length=250)
+    direccionURL = models.CharField(max_length=1028)
+
+    class Meta:
+        ordering = ['orden', 'nombre']

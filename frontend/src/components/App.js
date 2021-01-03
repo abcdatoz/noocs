@@ -20,7 +20,7 @@ import BannerAdmin from './cruds/BannerAdmin'
 import Municipio from './cruds/Municipio'
 import Escuela from './cruds/Escuela'
 import Curso from './cruds/Curso'
- 
+import VideoActividades from './cruds/VideoActividades' 
 
 
 const App = () => {
@@ -40,7 +40,8 @@ const App = () => {
                             <PrivateRoute exact path="/cMunicipio" component={Municipio} />
                             <PrivateRoute exact path="/cEscuela" component={Escuela} />
                             <PrivateRoute exact path="/cCurso" component={Curso} />
-                              
+                            <PrivateRoute exact path="/cCursoVideoActividad/:cursoId" component={VideoActividades} />
+                             
                             
                         </Switch>
                         

@@ -1,5 +1,5 @@
-from catalogos.models import Tipo, Banner, Municipio, Escuela , Curso
-from .serializers import TipoSerializer, BannerSerializer, MunicipioSerializer,EscuelaSerializer, CursoSerializer
+from catalogos.models import Tipo, Banner, Municipio, Escuela , Curso, VideoActividades
+from .serializers import TipoSerializer, BannerSerializer, MunicipioSerializer,EscuelaSerializer, CursoSerializer, VideoActividadesSerializer
 
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
@@ -131,7 +131,6 @@ class CursoViewSet(viewsets.ModelViewSet):
         serializer = CursoSerializer(instance)
         return Response(serializer.data)
          
-
     
     def destroy(self, request, *args, **kargs):
         instance = self.get_object()
@@ -140,3 +139,8 @@ class CursoViewSet(viewsets.ModelViewSet):
 
         serializer = CursoSerializer(instance)        
         return Response(serializer.data)
+ 
+class VideoActividadesViewSet(viewsets.ModelViewSet):
+    queryset = VideoActividades.objects.all()
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = VideoActividadesSerializer

@@ -1,84 +1,84 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {getEscuelas, addEscuela,editEscuela,deleteEscuela} from '../../actions/EscuelaActions'
-import {getMunicipios} from '../../actions/MunicipioActions'
+import {getVideoActividades,addVideoActividad,editVideoActividad,deleteVideoActividad} from '../../actions/VideoActividadesActions'
+import {getCursos} from '../../actions/CursoActions'
+import {useParams} from 'react-router-dom'
 
-
-const Escuela = () => {
-
-    const [clave, setClave] = useState('')
+const VideoActividades = () => {
+    const [curso, setCurso] = useState('')
+    const [tipo, setTipo] = useState('')  
+    const [orden, setOrden] = useState(0)  
     const [nombre, setNombre] = useState('')
-    const [direccion, setDireccion] = useState('')
-    const [municipio, setMunicipio] = useState('')
+    const [direccionURL, setDireccionURL] = useState('')
     const [id, setId] = useState('')
-    const [mode, setMode] = useState('new') 
+    const [mode, setMode] = useState('new')
 
 
-    const auth = useSelector(state => state.auth)
-    const escuelas = useSelector(state => state.escuela.lista)
-    const municipios = useSelector(state => state.municipio.lista)
+    const videoactividades = useSelector(state => state.videoactividades.lista)
+    const cursos = useSelector(state => state.curso.lista)
 
     const dispatch = useDispatch()
+    const params = useParams()
 
-    useEffect(() => {
-        dispatch(getEscuelas())
-        dispatch(getMunicipios())
-    }, [])
+    useEffect(()=> {
+        dispatch(getVideoActividades())
+        dispatch(getCursos())
+    },[])
 
-
-    const agregar = () => {
-        setClave('')
+    const agregar =()=>{
+        setCurso('')
+        setTipo('')
+        setOrden(0)
         setNombre('')
-        setDireccion('')
-        setMunicipio('')
-        setMode('new');
+        setDireccionURL('')
+        setMode('new')
     }
 
-    const editar = (item)=>{
-        setClave(item.clave)
+    const editar = (item) => {
+        setCurso(item.curso)
+        setTipo(item.tipo)
+        setOrden(item.orden)
         setNombre(item.nombre)
-        setDireccion(item.direccion)
-        setMunicipio(item.municipio)        
-        setId(item.id)
+        setDireccionURL(item.direccionURL)
         setMode('edit')
         $('#MyModal').modal('show')
     }
 
     const guardar = (e) => {
-
-        e.preventDefault();
+        e.preventDefault()
 
         let data = {
-            clave, 
+            curso: parseInt(params.cursoId),
+            tipo,
+            orden,
             nombre,
-            direccion,
-            municipio,
-            status: 1,
-            updated_by: 'user:' + auth.user.username
-        };
-        
+            direccionURL
+        }
 
         mode == 'new'
-            ? dispatch(addEscuela(data))
-            : dispatch(editEscuela(data,id))
-
-        $('#MyModal').modal('hide');
+            ? dispatch(addVideoActividad(data))
+            : dispatch(editVideoActividad(da,ta,id))
+        
+        $('MyModal').modal('hide')
     }
 
-    const eliminar = (item) => {
-        setId(item.id);
-        $('#MyConfirmation').modal('show');
+    const eliminar = () => {
+        setId (item.id)
+        $('MyConfirmation').modal('show')
     }
     
     const eliminarRegistro = () => {
-        dispatch(deleteEscuela(id));
-        $('#MyConfirmation').modal('hide');        
+        dispatch(deleteVideoActividad(id))
+        $('MyConfirmation').modal('hide')
+
     }
 
   
     return(
         <>
-            <h2>Escuelas</h2>
+            <h2>Actividades|Juegos|Videos</h2>
+
+             
 
            
             <button 
@@ -103,18 +103,51 @@ const Escuela = () => {
                         <div class="modal-body">
             
                         <form>
+
+                            <div className="form-group">
+                                <label>Curso  </label>
+                                <select 
+                                    className="form-control"
+                                    name="curso"
+                                    value={curso}
+                                    onChange={ e=> setCurso (e.target.value) } >                                    
+                                    {cursos.filter(p => p.id === parseInt(params.cursoId)).map(x => (
+                                    <option key={x.id} value={x.id}>
+                                    {x.nombre}
+                                    </option>
+                                ))}
+                                </select>
+                            </div>
+
+
+
+
                                 <div className="form-group">
-                                    <label>Clave</label>
-                                    <input 
+                                    <label>Tipo</label>
+                                    <select 
                                         className="form-control"
-                                        type="text"
-                                        placeholder="Introduzca la clave"
-                                        name="clave"
-                                        value={clave}
-                                        onChange={ e => setClave(e.target.value)}
-                                    />
+                                        name="tipo"
+                                        value={tipo}
+                                        onChange={ e=> setTipo (e.target.value) } >
+                                        <option value="null">Seleccione el curso</option>
+                                        <option value="actividad">Actividad</option>                                
+                                        <option value="juegos">Juegos</option>                                
+                                        <option value="videos">Videos</option>                                
+                                    </select>
                                 </div>
 
+                                <div className="form-group">
+                                    <label>Orden</label>
+                                    <input 
+                                        className="form-control"
+                                        type="number"
+                                        placeholder="Introduzca el orden"
+                                        name="orden"
+                                        value={orden}
+                                        onChange={ e => setOrden(e.target.value)}
+                                    />
+                                </div>
+ 
                                 <div className="form-group">
                                     <label>Nombre</label>
                                     <input 
@@ -129,33 +162,16 @@ const Escuela = () => {
  
 
                                 <div className="form-group">
-                                    <label>Dirección</label>
+                                    <label>Dirección URL</label>
                                     <input 
                                         className="form-control"
                                         type="text"
-                                        placeholder="Introduzca la dirección"
-                                        name="direccion"
-                                        value={direccion}
-                                        onChange={ e => setDireccion(e.target.value)}
+                                        placeholder="Introduzca la dirección url"
+                                        name="direccionURL"
+                                        value={direccionURL}
+                                        onChange={ e => setDireccionURL(e.target.value)}
                                     />
                                 </div>
-
-                                <div className="form-group">
-                                    <label>Municipio   </label>
-                                    <select 
-                                        className="form-control"
-                                        name="municipio"
-                                        value={municipio}
-                                        onChange={ e=> setMunicipio (e.target.value) } >
-                                        <option value="null">Seleccione su municipio</option>                                
-                                        {municipios.map(x => (
-                                        <option key={x.id} value={x.id}>
-                                        {x.nombre}
-                                        </option>
-                                    ))}
-                                    </select>
-                                </div>
-
 
 
 
@@ -173,18 +189,20 @@ const Escuela = () => {
 
             <table className="table table-striped">
                 <thead>
-                    <th>Clave</th>
+                    <th>Tipo</th>
+                    <th>Orden</th>
                     <th>Nombre</th>
-                    <th>Dirección</th>
+                    <th>Dirección URL</th>
                     <th> </th> 
                 </thead>     
                 <tbody>
                     {
-                        escuelas.map(item=>(
+                        videoactividades.map(item=>(
                             <tr key={item.id}>
-                                <td>{item.clave}</td>
+                                <td>{item.tipo}</td>
+                                <td>{item.orden}</td>
                                 <td>{item.nombre}</td>
-                                <td>{item.direccion}</td>
+                                <td>{item.direccionURL}</td>
                                 <td>
                                     <button  onClick={() => editar(item)} className="btn btn-default btn-lg" >
                                         <span className="fa fa-edit" aria-hidden="true"></span>
@@ -229,11 +247,8 @@ const Escuela = () => {
         </>
     );
 
- 
-    
-         
 
 }
 
 
-export default Escuela;
+export default VideoActividades;

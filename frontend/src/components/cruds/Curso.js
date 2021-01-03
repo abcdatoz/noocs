@@ -1,7 +1,8 @@
 import React,{ useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {getCursos, addCurso, editCurso, deleteCurso} from '../../actions/CursoActions'
-
+import { Link } from 'react-router-dom' 
+ 
 const Curso =() =>{
     const [nombre, setNombre] = useState('')
     const [imagen, setImagen] = useState('')
@@ -11,6 +12,7 @@ const Curso =() =>{
 
     const [mode, setMode] = useState('new')
     const [id, setId] = useState('')
+     
 
     
     const auth = useSelector(state => state.auth)
@@ -94,10 +96,16 @@ const Curso =() =>{
     }
 
 
+    const verVideoActividades = (item) => {
+
+    }
+
+
 
     return (
         <>
             <h2>Cursos</h2>
+            
 
             <button
                 type="button"
@@ -205,6 +213,8 @@ const Curso =() =>{
                     <th>Descripción A</th>
                     <th>Descripción B</th>
                     <th>Descripción C</th>
+                    <th>Videos-Actividades</th>
+
                     <th> </th> 
                 </thead>     
                 <tbody>
@@ -216,7 +226,13 @@ const Curso =() =>{
                                 <td>{item.descripcionA}</td>
                                 <td>{item.descripcionB}</td>
                                 <td>{item.descripcionC}</td>
+                                <td>  
+                                    <Link to={`/cCursoVideoActividad/${item.id}`}>
+                                        <span className="fa fa-code" aria-hidden="true"></span>
+                                    </Link>                                    
+                                 </td>
                                 <td>
+                                    
                                     <button  onClick={() => editar(item)} className="btn btn-default btn-lg" >
                                         <span className="fa fa-edit" aria-hidden="true"></span>
                                     </button>
