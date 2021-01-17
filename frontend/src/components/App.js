@@ -21,6 +21,7 @@ import Municipio from './cruds/Municipio'
 import Escuela from './cruds/Escuela'
 import Curso from './cruds/Curso'
 import VideoActividades from './cruds/VideoActividades' 
+import Questions from './cruds/Question'
 
 
 const App = () => {
@@ -40,7 +41,8 @@ const App = () => {
                             <PrivateRoute exact path="/cMunicipio" component={Municipio} />
                             <PrivateRoute exact path="/cEscuela" component={Escuela} />
                             <PrivateRoute exact path="/cCurso" component={Curso} />
-                            <PrivateRoute exact path="/cCursoVideoActividad/:cursoId" component={VideoActividades} />
+                            <PrivateRoute exact path="/cCursoVideoActividad/:cursoId/:tipo" component={VideoActividades} />
+                            <PrivateRoute exact path="/cCursoQuestion/:cursoId" component={Questions} />
                              
                             
                         </Switch>
@@ -49,7 +51,8 @@ const App = () => {
                 </Fragment>
             </Router>
         </Provider>
-)
+
+    )
 }
 
 

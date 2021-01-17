@@ -38,11 +38,11 @@ export class Login extends Component {
                     <h2 className="text-center">Login</h2>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
-                            <label>Username</label>
+                            <label>Usuario</label>
                             <input 
                                 type="text"
                                 className="form-control"
-                                name="username"
+                                name="usuario"
                                 onChange={this.onChange}
                                 value={username}
                             />                            
@@ -50,7 +50,7 @@ export class Login extends Component {
  
 
                         <div className="form-group">
-                            <label>Password</label>
+                            <label>Contraseña</label>
                             <input 
                                 type="password"
                                 className="form-control"
@@ -63,7 +63,7 @@ export class Login extends Component {
 
                         <div className="form-group">
                             <button type="submit" className="btn btn-primary">
-                                Login
+                                Entrar
                             </button>
                         </div>
                         <p>

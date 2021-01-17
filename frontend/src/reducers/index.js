@@ -6,6 +6,8 @@ import municipio from './MunicipioReducer'
 import escuela from './EscuelaReducer'
 import curso from './CursoReducer'
 import videoactividades from './VideoActividadReducer'
+import question from './QuestionReducer'
+import answer from './AnswerReducer'
 
 export default combineReducers({
     auth, 
@@ -13,5 +15,7 @@ export default combineReducers({
     municipio,
     escuela,
     curso,
-    videoactividades
+    videoactividades,
+    question,
+    answer,
 });

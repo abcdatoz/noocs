@@ -57,7 +57,7 @@ class Curso(models.Model):
     updated_by = models.CharField(max_length=256)
 
 class VideoActividades(models.Model):
-    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, null=True)
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, null=False)
     tipo = models.CharField(max_length=50)
     orden = models.IntegerField()
     nombre = models.CharField(max_length=250)
@@ -65,3 +65,20 @@ class VideoActividades(models.Model):
 
     class Meta:
         ordering = ['orden', 'nombre']
+
+
+class Question(models.Model):
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, null=False)
+    inciso = models.CharField(max_length=1)
+    pregunta = models.CharField(max_length=255)
+
+    class Meta:
+        ordering = ['inciso']
+
+class Answer(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, null=False)
+    opcion = models.CharField(max_length=100)
+    es_correcta = models.BooleanField()
+    class Meta:
+        ordering = ['-es_correcta']
+

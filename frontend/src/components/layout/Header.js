@@ -8,6 +8,8 @@ const Header = () => {
     const {isAuthenticated, user} = useSelector( store => store.auth);
     const dispatch = useDispatch();
     
+
+  
     const authLinks = (
         <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
 
@@ -30,7 +32,7 @@ const Header = () => {
                 <span><strong>{user ? `Usuario:  ${user.username}` : ""}</strong></span>
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#" onClick={() => dispatch (logout) }>Salir</a>                    
+                <a className="dropdown-item" href="#" onClick={() => dispatch (logout()) }>Salir</a>                    
                 
                 </div>
             </li>                  

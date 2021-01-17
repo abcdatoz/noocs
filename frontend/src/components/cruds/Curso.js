@@ -96,9 +96,7 @@ const Curso =() =>{
     }
 
 
-    const verVideoActividades = (item) => {
-
-    }
+   
 
 
 
@@ -210,10 +208,11 @@ const Curso =() =>{
                 <thead>
                     <th>Imagen</th>
                     <th>Nombre</th>
-                    <th>Descripción A</th>
-                    <th>Descripción B</th>
-                    <th>Descripción C</th>
-                    <th>Videos-Actividades</th>
+                    <th>Descripción A</th>                    
+                    <th>Actividades</th>
+                    <th>Juegos</th>
+                    <th>Videos</th>
+                    <th>Quizz</th>
 
                     <th> </th> 
                 </thead>     
@@ -224,11 +223,24 @@ const Curso =() =>{
                                 <td><img src={item.imagen}  alt="foto" width="120px" height="120px"/> </td>
                                 <td>{item.nombre}</td>
                                 <td>{item.descripcionA}</td>
-                                <td>{item.descripcionB}</td>
-                                <td>{item.descripcionC}</td>
-                                <td>  
-                                    <Link to={`/cCursoVideoActividad/${item.id}`}>
-                                        <span className="fa fa-code" aria-hidden="true"></span>
+                                 <td>  
+                                    <Link to={`/cCursoVideoActividad/${item.id}/actividades`}>
+                                        <span className="fa fa-group" aria-hidden="true"></span>
+                                    </Link>                                    
+                                 </td>
+                                 <td>  
+                                    <Link to={`/cCursoVideoActividad/${item.id}/juegos`}>
+                                        <span className="fa fa-gamepad" aria-hidden="true"></span>
+                                    </Link>                                    
+                                 </td>
+                                 <td>  
+                                    <Link to={`/cCursoVideoActividad/${item.id}/videos`}>
+                                        <span className="fa fa-play-circle" aria-hidden="true"></span>
+                                    </Link>                                    
+                                 </td>
+                                 <td>  
+                                    <Link to={`/cCursoQuestion/${item.id}`}>
+                                        <span className="fa fa-tasks" aria-hidden="true"></span>
                                     </Link>                                    
                                  </td>
                                 <td>
@@ -237,7 +249,7 @@ const Curso =() =>{
                                         <span className="fa fa-edit" aria-hidden="true"></span>
                                     </button>
                                 
-                                     <button  onClick={() => eliminar(item)} className="btn btn-default btn-lg" >
+                                    <button  onClick={() => eliminar(item)} className="btn btn-default btn-lg" >
                                         <span className="fa fa-trash" aria-hidden="true"></span>
                                     </button>                                    
 

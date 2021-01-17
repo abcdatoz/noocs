@@ -1,5 +1,5 @@
-from catalogos.models import Tipo, Banner, Municipio, Escuela , Curso, VideoActividades
-from .serializers import TipoSerializer, BannerSerializer, MunicipioSerializer,EscuelaSerializer, CursoSerializer, VideoActividadesSerializer
+from catalogos.models import Tipo, Banner, Municipio, Escuela , Curso, VideoActividades, Question, Answer
+from .serializers import TipoSerializer, BannerSerializer, MunicipioSerializer,EscuelaSerializer, CursoSerializer, VideoActividadesSerializer, QuestionSerializer, AnswerSerializer
 
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
@@ -144,3 +144,43 @@ class VideoActividadesViewSet(viewsets.ModelViewSet):
     queryset = VideoActividades.objects.all()
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = VideoActividadesSerializer
+
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    queryset = Question.objects.all()
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = QuestionSerializer
+
+    def create (self, request, *args, **kargs):
+        data = request.data
+
+        curso = Curso.objects.get(id=data['curso'])
+
+        question = Question.objects.create(
+            curso=curso,
+            inciso = data['inciso'],
+            pregunta = data['pregunta']
+        )
+
+        question.save()
+
+        ans = Answer.objects.create( question = question, opcion = data['respuesta'], es_correcta = True )
+        ansB = Answer.objects.create( question = question, opcion = data['opcionB'], es_correcta = False )
+        ansC = Answer.objects.create( question = question, opcion = data['opcionC'], es_correcta = False )
+        ansD = Answer.objects.create( question = question, opcion = data['opcionD'], es_correcta = False )
+
+        ans.save()
+        ansB.save()
+        ansC.save()
+        ansD.save()
+
+        serializer = QuestionSerializer(question)
+        return Response(serializer.data)
+
+
+
+
+class AnswerViewSet(viewsets.ModelViewSet):
+    queryset = Answer.objects.all()
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = AnswerSerializer
