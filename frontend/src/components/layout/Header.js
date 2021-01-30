@@ -10,7 +10,7 @@ const Header = () => {
     
 
   
-    const authLinks = (
+    const AdminLinks = (
         <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
 
             <li className="nav-item">
@@ -39,36 +39,40 @@ const Header = () => {
         </ul>                        
     );
 
-    const guestLinks = (
+    const userLinks = (
         <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
 
-
-            <li className="nav-item dropdown">
+            <li className="nav-item">
+                <a className="dropdown-item" href="#">opcion x</a>
+            </li>
+            <li className="nav-item">
+                <a className="dropdown-item" href="#">opcion y</a>
+            </li>
+            <li className="nav-item">
+                <a className="dropdown-item" href="#">opcion z</a>
+            </li>
+       
+ 
+ 
+             <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                CRUDs
+                <span><strong>{user ? `Usuario:  ${user.username}` : ""}</strong></span>
                 </a>
-                
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#">Option X</a>                    
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#">option A</a>
-                <a className="dropdown-item" href="#">option B</a>    
+                <a className="dropdown-item" href="#" onClick={() => dispatch (logout()) }>Salir</a>                    
                 
                 </div>
-            </li>   
+            </li>                  
+        </ul>                        
+    );
+ 
+
+    const guestLinks = (
+        <ul className="navbar-nav ml-auto mt-6 mt-lg-0">
 
             <li className="nav-item">
-             <a className="dropdown-item" href="/#/sweet">sweet home</a>
+                <a className="dropdown-item" href="/#/login">Entrar</a>
             </li>
-
-
-            <li className="nav-item">
-            <a className="dropdown-item" href="/#/login">login</a>
-            </li>
-
-            
-
-        
         </ul>                        
     );
 
@@ -81,7 +85,12 @@ const Header = () => {
             <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <a className="navbar-brand" href="#">Ciudadania Digital</a>                        
             </div>
-            {isAuthenticated ? authLinks : guestLinks}
+            {isAuthenticated 
+                ? user.is_staff
+                    ? AdminLinks 
+                    : userLinks
+                : guestLinks
+            }
         </nav>
         
     

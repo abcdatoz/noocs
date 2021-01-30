@@ -1,10 +1,11 @@
 import axios from 'axios'
-//import { returnErrors } from './messages'
+import { returnErrors } from './messages'
 import { USER_LOADED, AUTH_ERROR, USER_LOADING
         , LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS 
         , REGISTER_SUCCESS, REGISTER_FAIL
         } from './types'
 
+import { addUsuarioEscuela } from '../actions/UsuarioEscuelaActions'
 
 //check token and load user 
 export const loadUser = () =>  (dispatch,getState) => {
@@ -48,16 +49,12 @@ export const login = (username,password) =>  dispatch => {
             payload:res.data 
         });
     }).catch( err => {
-        //dispatch(returnErrors(err.response.data, err.response.status));;
-        console.log(err)
-        dispatch({
-            type:LOGIN_FAIL
-        });
+         alert('El usuario y/o contraseña son erroneas')
     });
 }
 
 
-export const register = ({username, password, email}) =>  dispatch => {
+export const register = ({username, password, email, municipio, escuela}) =>  dispatch => {
 
     const config = {
         headers:{
@@ -69,10 +66,16 @@ export const register = ({username, password, email}) =>  dispatch => {
 
     axios.post('/api/auth/register',body, config)
     .then(res=> {
+         
         dispatch({
             type:REGISTER_SUCCESS,
             payload:res.data 
         });
+
+         let  registro = JSON.stringify( { municipio, escuela, usuario: res.data.user.id })
+
+        dispatch (addUsuarioEscuela( registro, res.data.token))
+         
     }).catch( err => {
         //dispatch(returnErrors(err.response.data, err.response.status));;
         console.log(err)

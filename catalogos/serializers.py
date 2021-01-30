@@ -1,10 +1,15 @@
 from rest_framework import serializers
-from catalogos.models import Tipo, Banner, Municipio, Escuela, Curso, VideoActividades
+from catalogos.models import UsuarioEscuela, Tipo, Banner, Municipio, Escuela, Curso, VideoActividades
 from catalogos.models import Question, Answer
 
 class TipoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tipo 
+        fields = '__all__'
+
+class UsuarioEscuelaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UsuarioEscuela
         fields = '__all__'
 
 class BannerSerializer(serializers.ModelSerializer):

@@ -2,13 +2,21 @@ from rest_framework import generics, permissions
 from rest_framework.response import Response 
 from knox.models import AuthToken 
 from .serializers import UserSerializer, RegisterSerializer,LoginSerializer
+ 
 
 # Register API
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
     def post(self,request, *arg, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+
+        datos = {
+            "username": request.data.get("username"),
+            "password": request.data.get("password"),
+            "email": request.data.get("email")
+        } 
+ 
+        serializer = self.get_serializer(data=datos)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 

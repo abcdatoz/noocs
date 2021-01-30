@@ -11,6 +11,11 @@ class Tipo(models.Model):
     def __str__(self):
         return self.nombre
 
+class UsuarioEscuela(models.Model):
+    usuario = models.IntegerField()
+    municipio = models.IntegerField()
+    escuela = models.IntegerField()
+
 class Banner(models.Model):
     titulo = models.CharField(max_length=255)
     imagen = models.ImageField(upload_to='noocs_images/banner')

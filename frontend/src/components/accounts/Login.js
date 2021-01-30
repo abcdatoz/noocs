@@ -19,7 +19,15 @@ export class Login extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        this.props.login(this.state.username, this.state.password)
+
+        const {username, password} = this.state;
+
+        if(username == '' ||  password == ''){
+            alert ('El usuario y contraseña son necesarios para loguearse');
+            return;
+        }
+
+        this.props.login(username, password)
     }
 
     onChange = e => {
@@ -35,14 +43,14 @@ export class Login extends Component {
         return (
             <div className="col-md-6 m-auto">
                 <div className="card card-body mt-5">
-                    <h2 className="text-center">Login</h2>
+                    <h2 className="text-center">Entrar a Ciudadania Digital</h2>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <label>Usuario</label>
                             <input 
                                 type="text"
                                 className="form-control"
-                                name="usuario"
+                                name="username"
                                 onChange={this.onChange}
                                 value={username}
                             />                            
@@ -67,7 +75,11 @@ export class Login extends Component {
                             </button>
                         </div>
                         <p>
-                            ¿No tienes cuenta?<Link to="/register">Registrate</Link>
+                        <br/>
+                        <br/>
+
+                            ¿Aún no tienes cuenta? <br/>
+                            <Link to="/register">Registrate</Link> y diviertete aprendiendo
                         </p>
                     </form>
                 </div>

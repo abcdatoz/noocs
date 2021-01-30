@@ -1,5 +1,7 @@
-from catalogos.models import Tipo, Banner, Municipio, Escuela , Curso, VideoActividades, Question, Answer
-from .serializers import TipoSerializer, BannerSerializer, MunicipioSerializer,EscuelaSerializer, CursoSerializer, VideoActividadesSerializer, QuestionSerializer, AnswerSerializer
+from catalogos.models import UsuarioEscuela, Tipo, Banner, Municipio, Escuela , Curso, VideoActividades, Question, Answer
+from .serializers import  UsuarioEscuelaSerializer, TipoSerializer, BannerSerializer, MunicipioSerializer,EscuelaSerializer, CursoSerializer, VideoActividadesSerializer 
+from .serializers import  QuestionSerializer, AnswerSerializer
+
 
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
@@ -9,6 +11,10 @@ class TipoViewSet(viewsets.ModelViewSet):
     permission_classes =  [permissions.AllowAny]
     serializer_class = TipoSerializer
 
+class UsuarioEscuelaViewSet(viewsets.ModelViewSet):
+    queryset = UsuarioEscuela.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = UsuarioEscuelaSerializer
 
 class MunicipioViewSet(viewsets.ModelViewSet):
     queryset = Municipio.objects.all()
@@ -75,7 +81,6 @@ class BannerViewSet(viewsets.ModelViewSet):
     
     def update(self, request, *args, **kargs):
         data = request.data
-
         instance = self.get_object()
         instance.imagen.delete()
         instance.nombre = data['titulo']        

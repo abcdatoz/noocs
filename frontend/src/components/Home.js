@@ -37,13 +37,13 @@ const Home = () => {
 
              
             {    
-                        banners.map((each, index) => (  
+                  /*      banners.map((each, index) => (  
                         <div   key={index}>                           
                             <img src={each.imagen} style={{width: "100%"}} />
                             <h3>{each.titulo} </h3>                            
                         </div>                                 
                             
-                    ))
+                    ))*/
                     }
 
 
