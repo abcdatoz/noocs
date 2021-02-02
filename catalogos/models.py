@@ -87,3 +87,10 @@ class Answer(models.Model):
     class Meta:
         ordering = ['-es_correcta']
 
+
+class MisCursos(models.Model):
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, null=False)
+    usuario = models.IntegerField()
+    fecha = models.DateTimeField(auto_now_add=True)
+    estatus = models.CharField(max_length=255)
+     

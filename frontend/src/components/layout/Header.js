@@ -14,6 +14,9 @@ const Header = () => {
         <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
 
             <li className="nav-item">
+                <a className="dropdown-item" href="/#/">Home</a>
+            </li>
+            <li className="nav-item">
                 <a className="dropdown-item" href="/#/cBanner">Banners</a>
             </li>
             <li className="nav-item">
@@ -43,7 +46,7 @@ const Header = () => {
         <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
 
             <li className="nav-item">
-                <a className="dropdown-item" href="#">opcion x</a>
+                <a className="dropdown-item" href="/#/sweet">sweet</a>
             </li>
             <li className="nav-item">
                 <a className="dropdown-item" href="#">opcion y</a>

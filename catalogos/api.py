@@ -1,11 +1,13 @@
-from catalogos.models import UsuarioEscuela, Tipo, Banner, Municipio, Escuela , Curso, VideoActividades, Question, Answer
+from catalogos.models import UsuarioEscuela, Tipo, Banner, Municipio, Escuela , Curso, VideoActividades
+from catalogos.models import  Question, Answer, MisCursos
+
 from .serializers import  UsuarioEscuelaSerializer, TipoSerializer, BannerSerializer, MunicipioSerializer,EscuelaSerializer, CursoSerializer, VideoActividadesSerializer 
-from .serializers import  QuestionSerializer, AnswerSerializer
+from .serializers import  QuestionSerializer, AnswerSerializer, MisCursosSerializer
 
 
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
-
+ 
 class TipoViewSet(viewsets.ModelViewSet):
     queryset = Tipo.objects.all()
     permission_classes =  [permissions.AllowAny]
@@ -189,3 +191,24 @@ class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = AnswerSerializer
+
+
+class MisCursosViewSet(viewsets.ModelViewSet):
+    queryset = MisCursos.objects.all()
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = MisCursosSerializer
+
+    def create (self, request, *args, **kargs):
+        data = request.data 
+
+        curso = Curso.objects.get(id=data['curso'])
+
+        registro = MisCursos.objects.create(
+            curso = curso,
+            usuario = data['usuario'],
+            estatus = 'Iniciado'             
+        ) 
+
+        registro.save()
+        serializer = MisCursosSerializer(registro)
+        return Response(serializer.data)

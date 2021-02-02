@@ -1,6 +1,6 @@
 from rest_framework import routers
 from .api import UsuarioEscuelaViewSet, TipoViewSet, BannerViewSet, MunicipioViewSet, EscuelaViewSet, CursoViewSet, VideoActividadesViewSet
-from .api import QuestionViewSet, AnswerViewSet
+from .api import QuestionViewSet, AnswerViewSet, MisCursosViewSet
 
 router = routers.DefaultRouter()
 
@@ -14,5 +14,6 @@ router.register('api/videoactividades', VideoActividadesViewSet)
 
 router.register('api/question',QuestionViewSet)
 router.register('api/answer',AnswerViewSet)
+router.register('api/miscursos',MisCursosViewSet)
 
 urlpatterns = router.urls

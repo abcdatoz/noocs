@@ -1,3 +1,9 @@
+ 
+* {
+  box-sizing: border-box;
+}
+
+
 body, html{
     height:100%;
     margin:0;
@@ -5,57 +11,109 @@ body, html{
     font-family:"Lato", sans-serif;
     font-weight:400;
     line-height:1.8em;
-    color:#666;
-  }
-
-
-  .divSlide{
-    margin: auto;
+    color:#a3a3a3;
+    background-color: rgba(189, 10, 10, 0.604); 
   }
 
   
-/*slide images*/
-.slide-container {
+
+  .flexbox-container{
+    display: flex;
+    flex-wrap: wrap;      
+  }
+  
+  .flexbox-item{
+    margin: 10px;    
+    border: solid #fff 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: #fff;    
+  }
+
+  .flexbox-item img{
+    max-height: 200px;
+    max-width: 250px;
+    height: 40%;
+  }
+  
+  .btnLink{    
+    color: #fff;     
     width: 90%;
-    margin: auto; }
-
-h3 {
-    text-align: center; }
-
-.each-slide > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    height: 300px;
-}
-
-.each-slide span {
-    padding: 20px;
-    font-size: 20px;
-    background: #efefef;
     text-align: center;
-}
+    border: solid #fff 1px;
+    border-radius: 10px;
+  }
 
-.each-fade {
+  .curso-item{
+    
+    height: 50vh;
+    flex: 0.5;
+    margin: 10px;
+    position: relative;
+    color:#fff;
+    
+  }
+
+  .btnTomar{
+    position: absolute;
+    bottom: 30px;
+    left: 0px;
+    background-color:#fff; 
+    color:rgba(189, 10, 10, 0.604); ;
+    
+  }
+
+  .btnRegresar{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    background-color: transparent;
+    color: #fff;
+     
+  }
+   
+  .curso-item img{
+    max-height: 50%;   
+  }
+  
+  
+
+
+
+  .main-item {
+    background-repeat: no-repeat;
+    background-color: #a3e76b;
+    height: 70vh;
+    max-height: 200px;
+    border-radius: 50px;
+    color: #fff;
+    flex: 1;
+    margin: 10px;
+    position: relative;
+
     display: flex;
-}
-
-.each-fade .image-container {
-    width: 75%;
-    overflow: hidden;
-}
-
-.each-fade .image-container img {
-    width: 100%;
-}
-
-.each-fade h2 {
-    width: 25%;
-    display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    
+    
+  }
+  
+  .main-item h3 {
+    font-size: 20px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
     margin: 0;
-    background: #adceed;
-}
-/*slide images*/
+    opacity: 1;
+  }
+   
+  .main-item img{
+    max-height: 30%;
+    max-width: 250px;  
+  }
+  
+  
+ 
+  

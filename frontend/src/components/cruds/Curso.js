@@ -225,7 +225,7 @@ const Curso =() =>{
                                 <td>{item.descripcionA}</td>
                                  <td>  
                                     <Link to={`/cCursoVideoActividad/${item.id}/actividades`}>
-                                        <span className="fa fa-group" aria-hidden="true"></span>
+                                        <span className="fa fa-group" aria-hidden="true">.</span>
                                     </Link>                                    
                                  </td>
                                  <td>  

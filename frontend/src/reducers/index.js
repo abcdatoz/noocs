@@ -9,6 +9,7 @@ import curso from './CursoReducer'
 import videoactividades from './VideoActividadReducer'
 import question from './QuestionReducer'
 import answer from './AnswerReducer'
+import miscursos from './MisCursosReducer'
 
 
 export default combineReducers({
@@ -21,4 +22,5 @@ export default combineReducers({
     videoactividades,
     question,
     answer,
+    miscursos
 });

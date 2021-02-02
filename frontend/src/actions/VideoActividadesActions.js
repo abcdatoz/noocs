@@ -2,7 +2,7 @@ import axios from 'axios'
 import {createMessage, returnErrors} from './messages' 
 import { tokenConfig } from './auth'
 
-export const GET_VIDEOACTIVIDADES = 'GET_VIDEOACTIVIDADS';
+export const GET_VIDEOACTIVIDADES = 'GET_VIDEOACTIVIDADES';
 export const ADD_VIDEOACTIVIDAD = 'ADD_VIDEOACTIVIDAD';
 export const EDIT_VIDEOACTIVIDAD = 'EDIT_VIDEOACTIVIDAD';
 export const DELETE_VIDEOACTIVIDAD ='DELETE_VIDEOACTIVIDAD';
