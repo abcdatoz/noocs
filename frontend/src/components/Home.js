@@ -40,7 +40,8 @@ const Home = () => {
             cursos
                 .map((item, index) => (  
                 <div   key={index} className="main-item">    
-                    <img src={item.imagen} style={{width: "100%"}}  />                       
+                    <img src={item.imagen} style={{width: "100%"}}  />    
+                    <p>{item.descripcionA}</p>                   
                     
                     <h3>{item.nombre} </h3>                            
                 </div>                                 
@@ -95,13 +96,18 @@ const Home = () => {
                                 <h3>{item.nombre}</h3>
                                 <img src={item.imagen} style={{width: "99%"}} />
                                 <p>Status:  { miscursos.filter(x=>x.curso ==item.id)[0].estatus } </p>
-                                <Link to={`/CursarCurso/${item.id}`} className="btnLink"> Entrar</Link> 
+                                <Link to={`/CursarCurso/${item.id}`} className="btnLink"> Entrar</Link>                                 
                             </div>
                         ))
                 }
                 </div>
 
             </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <h2><span>Noocs disponibles</span></h2>
             <div className="flexbox-container">
             {    

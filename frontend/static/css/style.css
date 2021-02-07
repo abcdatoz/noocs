@@ -12,10 +12,27 @@ body, html{
     font-weight:400;
     line-height:1.8em;
     color:#a3a3a3;
-    background-color: rgba(189, 10, 10, 0.604); 
+    /* background-color: rgba(189, 10, 10, 0.604); */
+    background-image: linear-gradient(90deg, #a8170d, #f70404); 
   }
 
+
   
+  .ask-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;        
+    font-size: 24px;
+  }
+
+  .btn-answer{
+    border-radius: 10px;
+    background-color: transparent;
+    margin: 10px;
+    padding: 10px;
+    color: #fff;
+  }
 
   .flexbox-container{
     display: flex;
@@ -44,6 +61,7 @@ body, html{
     text-align: center;
     border: solid #fff 1px;
     border-radius: 10px;
+    text-decoration: none;
   }
 
   .curso-item{
@@ -81,17 +99,22 @@ body, html{
   
 
 
+/*
 
+http://react.tips/dropdowns-in-react-16/
+
+*/
   .main-item {
     background-repeat: no-repeat;
-    background-color: #a3e76b;
-    height: 70vh;
-    max-height: 200px;
+    background-color: #595c56;
+    height: 70vh;    
     border-radius: 50px;
     color: #fff;
-    flex: 1;
+    
     margin: 10px;
     position: relative;
+
+    width: 200px;
 
     display: flex;
     flex-direction: column;
@@ -104,7 +127,7 @@ body, html{
     font-size: 20px;
     position: absolute;
     bottom: 20px;
-    left: 20px;
+    left: 10px;    
     margin: 0;
     opacity: 1;
   }

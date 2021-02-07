@@ -51,7 +51,7 @@ const Question = () => {
         setInciso (item.inciso);
         setPregunta(item.pregunta)
 
-        let ans = listaRespuestas.filter(x=>x.question === item.id)
+        let ans = listaRespuestas.filter(x=>x.question.id === item.id)
         setRespuesta(ans[0].opcion)
         setOpcionB(ans[1].opcion)
         setOpcionC(ans[2].opcion)
@@ -81,12 +81,12 @@ const Question = () => {
         }
 
         dispatch(addQuestion(data))        
-        dispatch(getAnswers())
         $('#MyModal').modal('hide')
 
     }
 
-    const eliminar = (item) => {$('#MyModal').modal('show')
+    const eliminar = (item) => {
+        setId(item.id)
         $('#MyConfirmation').modal('show')
     }
 
@@ -239,7 +239,7 @@ const Question = () => {
                             <td>{item.pregunta}</td>
                             {
                                 listaRespuestas
-                                    .filter (x=> x.question === item.id)
+                                    .filter (x=> x.question.id === item.id)
                                     .map (y => (
                                         <td>{y.opcion}</td>
                                     ))

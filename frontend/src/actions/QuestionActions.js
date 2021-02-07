@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { returnErrors} from './messages'
 import { tokenConfig } from './auth'
+import {getAnswers} from './AnswerActions'
 
 
 export const GET_QUESTIONS = 'GET_QUESTIONS'
@@ -27,6 +28,7 @@ export const addQuestion = (registro) => (dispatch, getState) => {
                 type: ADD_QUESTION,
                 payload: res.data
             })
+            dispatch(getAnswers())
         })
         .catch( err => dispatch(returnErrors(err.response.data, err.response.status)))
 }

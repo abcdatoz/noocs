@@ -25,6 +25,7 @@ import Questions from './cruds/Question'
 
 import VerCurso from './VerCurso'
 import CursarCurso from './CursarCurso'
+import TestCurso from './TestCurso'
 
 
 const App = () => {
@@ -49,6 +50,7 @@ const App = () => {
                             
                             <PrivateRoute exact path="/VerCurso/:cursoId" component={VerCurso} />
                             <PrivateRoute exact path="/CursarCurso/:cursoId" component={CursarCurso} />
+                            <PrivateRoute exact path="/PopQuiz/:cursoId" component={TestCurso} />
                              
                             
                         </Switch>

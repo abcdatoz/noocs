@@ -3,6 +3,10 @@ import {useSelector, useDispatch} from 'react-redux'
 import {getCursos} from '../actions/CursoActions'
 import {getMisCursos} from '../actions/MisCursosActions'
 import {getVideoActividades} from '../actions/VideoActividadesActions'
+
+import {getQuestions} from '../actions/QuestionActions'
+import {getAnswers} from '../actions/AnswerActions'
+
 import {Link, useParams} from 'react-router-dom'
 import ReactPlayer from 'react-player'
 
@@ -24,28 +28,37 @@ const CursarCurso = () =>{
         dispatch(getCursos())
         dispatch(getMisCursos())                 
         dispatch(getVideoActividades())
+
+        dispatch(getQuestions())
+        dispatch(getAnswers())
  
     }, [])
  
-    const filtrar = (elemento) =>{
-
-        let res = miscursos.find(x => {  return x.curso == elemento.curso.id; });
-            
-
-    }
+ 
 
      return(
 
       
         <div> 
 
-            <Link to={`/`}>
-                <span className="fa fa-arrow-left" aria-hidden="true">Regresar</span>
-            </Link>
+            <ul>
+                <li>
+                    <Link to={`/`}>
+                        <span className="fa fa-arrow-left" className="btnLink">Regresar</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link to={`/PopQuiz/${params.cursoId}`} className="btnLink"> Aprobar Curso</Link> 
+                </li>
+            </ul>
+            
+
+            
 
             {
                 miscursos
                     .filter(x=>x.curso == params.cursoId)
+                    .filter(y=>y.usuario == user.id)
                     .map( micurso => (
                         <div key={micurso.id}>
 
