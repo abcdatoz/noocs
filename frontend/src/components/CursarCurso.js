@@ -40,18 +40,12 @@ const CursarCurso = () =>{
 
       
         <div> 
-
-            <ul>
-                <li>
-                    <Link to={`/`}>
-                        <span className="fa fa-arrow-left" className="btnLink">Regresar</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link to={`/PopQuiz/${params.cursoId}`} className="btnLink"> Aprobar Curso</Link> 
-                </li>
-            </ul>
-            
+             
+            <div className="circle-container">
+                <div className="circle">
+                    <Link to={`/PopQuiz/${params.cursoId}`} id="popquizz"> Hacer Test</Link> 
+                </div>
+            </div>
 
             
 
@@ -127,7 +121,9 @@ const CursarCurso = () =>{
                 
             }
 
-            
+            <Link to={`/`}>
+                <span className="fa fa-arrow-left" className="btnLink">Regresar</span>
+            </Link>
 
                 
         </div>

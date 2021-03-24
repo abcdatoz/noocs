@@ -49,8 +49,7 @@ const VerCurso = () =>{
     return(
         <div> 
              
-           
-
+             
              
 
             {    
@@ -73,13 +72,16 @@ const VerCurso = () =>{
                             </ul>
 
 
-
-                            <button  onClick={()=> tomarCurso(each.id)}  style={{width:"100%"}} className="btnTomar">
+                            <button  onClick={()=> tomarCurso(params.cursoId)} style={{width:"50%"}} >
                                 Tomar Curso
                             </button> 
+                            
                             <br /> 
 
-                            <button  onClick={()=> regresar()} style={{width:"100%"}} className="btnRegresar">
+                          
+
+
+                            <button  onClick={()=> regresar()} style={{width:"50%"}} >
                                 Regresar
                             </button> 
 

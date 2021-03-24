@@ -13,7 +13,7 @@ body, html{
     line-height:1.8em;
     color:#a3a3a3;
     /* background-color: rgba(189, 10, 10, 0.604); */
-    background-image: linear-gradient(90deg, #a8170d, #f70404); 
+    background-image: linear-gradient(90deg, #241096, #6867b6); 
   }
 
 
@@ -34,11 +34,42 @@ body, html{
     color: #fff;
   }
 
+
+
+
+  .circle-container {
+    position: relative;
+    top: 50px;
+    right: 50px;
+  }
+  
+  .circle {
+    background-color: #463e3e;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    position: relative;
+    transition: transform 0.5s linear;    
+  }
+
+  #popquizz {
+    position: absolute;    
+  }
+  
+
+  
+
+
   .flexbox-container{
     display: flex;
     flex-wrap: wrap;      
   }
   
+  .flexbox-container-aside{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(10, 4, 2);
+  }
   .flexbox-item{
     margin: 10px;    
     border: solid #fff 1px;

@@ -70,75 +70,92 @@ const Home = () => {
     const userOption = (
         <>
             <h2><span> Mis Noocs</span></h2>
-            <div>
-                
-                <div className="flexbox-container">
 
-                {
-                    cursos
-                        .filter(x=> {
-                            
-                            let arr = [];
 
-                            if (user){
-                                arr = miscursos
-                                        .filter (x=> x.usuario == user.id)
-                                        .map (x => {  return x.curso }) 
-                            }
+            <div class="container">                
+                <div class="row">
 
-                            
-                            let res = arr.find(y => {  return y == x.id; });
-                            return res != undefined;
+                    {/* panel principal */}
+                    <div class="col-9">
 
-                        })
-                        .map((item) => (                            
-                            <div className = "flexbox-item" key={item.id}>
-                                <h3>{item.nombre}</h3>
-                                <img src={item.imagen} style={{width: "99%"}} />
-                                <p>Status:  { miscursos.filter(x=>x.curso ==item.id)[0].estatus } </p>
-                                <Link to={`/CursarCurso/${item.id}`} className="btnLink"> Entrar</Link>                                 
-                            </div>
-                        ))
-                }
-                </div>
+                    <div className="flexbox-container">
+                        {
+                            cursos
+                                .filter(x=> {
+                                    
+                                    let arr = [];
 
-            </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <h2><span>Noocs disponibles</span></h2>
-            <div className="flexbox-container">
-            {    
-                cursos
-                    .filter(x=> {
+                                    if (user){
+                                        arr = miscursos
+                                                .filter (x=> x.usuario == user.id)
+                                                .map (x => {  return x.curso }) 
+                                    }
 
-                        let arr = [];
+                                    
+                                    let res = arr.find(y => {  return y == x.id; });
+                                    return res != undefined;
 
-                        if (user){
-                            arr = miscursos
-                                    .filter (x=> x.usuario == user.id)
-                                    .map (x => {  return x.curso }) 
+                                })
+                                .map((item) => (                            
+                                    <div className = "flexbox-item" key={item.id}>
+                                        <h3>{item.nombre}</h3>
+                                        <img src={item.imagen} style={{width: "99%"}} />
+                                        <p>Status:  { miscursos.filter(x=>x.curso ==item.id)[0].estatus } </p>
+                                        <Link to={`/CursarCurso/${item.id}`} className="btnLink"> Entrar</Link>                                 
+                                    </div>
+                                ))
                         }
+                        </div>
+
+                    </div>
+
+                    {/* a side menu */}
+                    <div class="col-3">
                         
-                        let res = arr.find(y => {  return y == x.id; });
-                        return res == undefined;
 
-                    })                
-                    .map((item, index) => (  
-                        <div   key={index} className="flexbox-item">    
-                            <img src={item.imagen} style={{width: "99%"}} />                                            
-                            <h3>{item.nombre} </h3>   
-                            
-
-                            <Link to={`/VerCurso/${item.id}`} className="btnLink">Ver Curso</Link> 
-
-                        </div>                                 
-                            
-                    ))
-            }
+                    </div>
+                </div>
             </div>   
+ 
+                         
+            <h2><span>Noocs disponibles</span></h2>
+                        <div className="flexbox-container">
+                        {    
+                            cursos
+                                .filter(x=> {
+
+                                    let arr = [];
+
+                                    if (user){
+                                        arr = miscursos
+                                                .filter (x=> x.usuario == user.id)
+                                                .map (x => {  return x.curso }) 
+                                    }
+                                    
+                                    let res = arr.find(y => {  return y == x.id; });
+                                    return res == undefined;
+
+                                })                
+                                .map((item, index) => (  
+                                    <div   key={index} className="flexbox-item">    
+                                        <img src={item.imagen} style={{width: "99%"}} />                                            
+                                        <h3>{item.nombre} </h3>   
+                                        
+
+                                        <Link to={`/VerCurso/${item.id}`} className="btnLink">Ver Curso</Link> 
+
+                                    </div>                                 
+                                        
+                                ))
+                        }
+                        </div>   
+
+                
+
+             
+            
+            
+            
          </>
     )
 
